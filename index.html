@@ -1,0 +1,98 @@
+<html>
+    <head>
+        <title>DriveU Calculator</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                DRIVER's CALCULATOR
+            </div>
+            <div class="settings">
+                <div>Minimum Charge<input type="text" id="mincharge" value="250"/></div>
+                <div>Charge For 1 Hour<input type="text" id="hourlycharge" value="120"/></div>
+                
+            </div>
+            <div class="time">
+                <div>Start Time<input type="time" id="starttime"/></div>
+                <div>End Time<input type="time" id="endtime"/></div>
+            </div>
+            <div class="results">
+                <button onclick="calculate()">Calculate Fare</button>
+                <b id="result"></b>
+            </div>
+        </div>
+            
+    </body>
+<style>
+
+body {
+    margin: 0 auto;
+}
+.container {
+    margin: 0 auto;
+    max-width: 368px;
+    padding: 15px 5px;
+    border: 1px solid #cbc2c2;
+    border-radius: 5px;
+}
+.header {
+    margin-bottom: 15px;
+    font-family: cursive;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #c5baba;
+}
+.container div div {
+    display: flex;
+    width: 100%;
+    margin: 10px 0px;
+    background: #f7f7f7;
+}
+.container div div input {
+    margin-left: auto;
+    width: 120px;
+}
+.results {
+    display: flex;
+}
+b#result {
+    margin-left: auto;
+    color: green;
+}
+
+</style>
+<script>
+    function calculate(){
+        var mincharge = document.getElementById("mincharge").value;
+        
+        var hourlycharge = document.getElementById("hourlycharge").value;
+
+        var starttime = document.getElementById("starttime").value;
+        var starttime1 = starttime.split(':');
+        var starttimeminutes = (+starttime1[0])*60+(+starttime1[1]);
+
+        var endtime = document.getElementById("endtime").value;
+        var endtime1 = endtime.split(':');
+        var endtimeminutes = (+endtime1[0])*60+(+endtime1[1]);
+        
+        var difference = endtimeminutes-starttimeminutes;
+        var minimumtime = (60/hourlycharge)*mincharge;
+        
+        if(difference<minimumtime){
+            //alert(mincharge);
+            var result = mincharge;
+        }else{
+            var differencefare = difference*(hourlycharge/60);
+            //alert(differencefare);
+            var result = differencefare.toFixed();
+        }
+        document.getElementById("result").innerHTML=result;
+        
+    }
+    
+    
+   
+</script>
+
+</html>
